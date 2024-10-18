@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>To-Do List</title>
+</head>
+<body>
+    <div class="main-cont">
+        <div class="container1">
+            <div class="sec1">
+                <h1>To-Do </h1>
+                <ul>
+                    {% for i in todos %}
+                       <li>
+                            <span {% if i['done'] %} style="text-decoration: line-through;" {% endif %}>{{i['task'] }}</span>
+                            <div>
+                                <a href="{{ url_for('check', index = loop.index0)}}">Check</a>
+                                <a href="{{ url_for('edit', index = loop.index0)}}">Edit</a>
+                                <a href="{{ url_for('delete', index = loop.index0)}}">Delete</a>
+                            </div>
+                       </li>
+                
+                    {% endfor %}
+                </ul>
+                <form action="{{ url_for('add') }}" method="post">
+                    <input type="text" name = "todo" placeholder="Add a new task">
+                    <button type="submit">Add Task</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
